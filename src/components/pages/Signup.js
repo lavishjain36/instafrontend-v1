@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 //make http request ,import axios
 import axios  from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const Signup=()=>{
 
     //define state ->useState hooks
@@ -13,6 +17,33 @@ const Signup=()=>{
     //Function to handle user Signup user data
     const PostData=()=>{
         //regex validation for email
+        //add validation check for name,email and password 
+        if(!name||!email||!password){
+            toast.error("Please fill in all fields..");
+            return;
+        }
+
+             // Email validation regex
+  const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
+  // Password validation regex: Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character
+  const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+
+  //validate email format using regex 
+  if(!email.match(emailRegex)){
+    //add error with toast
+    toast.error("Invalid Email format",{
+      position:toast.POSITION.TOP_RIGHT,
+    });
+    return;
+  }
+  if(!password.match(passwordRegex)){
+    toast.error("Invalid password Format",{
+      position:toast.POSITION.TOP_RIGHT,
+    });
+    return;
+  }
+
         //use axios to make a post request to /signup route
 
         axios.post("http://localhost:5000/signup",{
@@ -68,6 +99,7 @@ const Signup=()=>{
             <Link to="/signin">Already having an account?</Link>
         </h6>
        </div>
+       <ToastContainer/>
     </div>
    
     )

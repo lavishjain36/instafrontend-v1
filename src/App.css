@@ -73,3 +73,14 @@ input[type=text]:focus {
   font-size: 20px;
 
 }
+
+.postcontainer{
+  margin: 30px auto !important;
+  max-width: 500px !important;
+  padding: 40px;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-family: cursive;
+  font-size: 20px;
+}
